@@ -1,0 +1,8 @@
+patch:
+  schema_list:
+    - schema: zcheng
+    - schema: wubi86
+    # - schema: wubi_trad # 五笔
+    - schema: latex
+    - schema: numbers               # 大写数字
+ 

@@ -1,0 +1,29 @@
+# Rime user dictionary
+#@/db_name	luna_pinyin
+#@/db_type	userdb
+#@/rime_version	1.7.3
+#@/tick	34
+#@/user_id	zcheng
+bao chi 	保持	c=1 d=0.980199 t=34
+bao cun 	保存	c=1 d=0.99005 t=34
+cang ku 	倉庫	c=1 d=0.960789 t=34
+cheng 	成	c=0 d=0.0927743 t=34
+cheng 	誠	c=0 d=0.097531 t=34
+dai ma 	代碼	c=2 d=1.91221 t=34
+dao 	到	c=1 d=0.946485 t=34
+de 	的	c=0 d=0.099005 t=34
+de fan ti 	的繁體	c=1 d=0.995012 t=34
+fan ti 	繁體	c=2 d=2.07765 t=34
+ji de 	記的	c=1 d=0.985112 t=34
+jian ti 	簡體	c=1 d=1 t=34
+li zhi 	李志	c=0 d=0.097531 t=34
+li zhi 	理智	c=0 d=0.0927743 t=34
+li zhi cheng 	李志成	c=3 d=2.91136 t=34
+li zhi cheng 	李志誠	c=4 d=3.67421 t=34
+li zhi cheng 	理智成	c=2 d=1.86946 t=34
+ni hao 	你好	c=5 d=4.7293 t=34
+ni hao 	妳好	c=2 d=1.88825 t=34
+shi ke 	時刻	c=1 d=0.97531 t=34
+tui song 	推送	c=2 d=1.90268 t=34
+yuan cheng 	遠程	c=2 d=1.90722 t=34
+zheng ju 	證據	c=2 d=1.99501 t=34

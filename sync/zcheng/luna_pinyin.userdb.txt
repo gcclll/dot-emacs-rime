@@ -2,29 +2,41 @@
 #@/db_name	luna_pinyin
 #@/db_type	userdb
 #@/rime_version	1.7.3
-#@/tick	41
+#@/tick	59
 #@/user_id	zcheng
-bao chi 	保持	c=1 d=0.980199 t=41
-bao cun 	保存	c=1 d=0.99005 t=41
-cang ku 	倉庫	c=1 d=0.960789 t=41
-cheng 	成	c=0 d=0.0927743 t=41
-cheng 	誠	c=0 d=0.097531 t=41
-dai ma 	代碼	c=2 d=1.91221 t=41
-dao 	到	c=1 d=0.946485 t=41
-de 	的	c=0 d=0.099005 t=41
-de fan ti 	的繁體	c=1 d=0.995012 t=41
-fan ti 	繁體	c=5 d=5.06865 t=41
-fan ti fan ti 	繁體繁體	c=1 d=1 t=36
-ji de 	記的	c=1 d=0.985112 t=41
-jian ti 	簡體	c=4 d=3.93106 t=41
-li zhi 	李志	c=0 d=0.097531 t=41
-li zhi 	理智	c=0 d=0.0927743 t=41
-li zhi cheng 	李志成	c=3 d=2.91136 t=41
-li zhi cheng 	李志誠	c=4 d=3.67421 t=41
-li zhi cheng 	理智成	c=2 d=1.86946 t=41
-ni hao 	你好	c=5 d=4.7293 t=41
-ni hao 	妳好	c=2 d=1.88825 t=41
-shi ke 	時刻	c=1 d=0.97531 t=41
-tui song 	推送	c=2 d=1.90268 t=41
-yuan cheng 	遠程	c=2 d=1.90722 t=41
-zheng ju 	證據	c=2 d=1.99501 t=41
+bao chi 	保持	c=1 d=0.980199 t=59
+bao cun 	保存	c=1 d=0.99005 t=59
+bu xian shi 	不顯示	c=1 d=0.99005 t=59
+cang ku 	倉庫	c=1 d=0.960789 t=59
+cheng 	成	c=0 d=0.0927743 t=59
+cheng 	誠	c=0 d=0.097531 t=59
+da jing da fa 	大經大法	c=0 d=0.0985112 t=59
+da jing da fa liang de fen ju da kou fu jiao ka fei er 	大經大法兩地分居大口福餃卡非爾	c=1 d=0.99005 t=59
+da kou fu jiao 	大口福餃	c=0 d=0.0985112 t=59
+dai ma 	代碼	c=2 d=1.91221 t=59
+dao 	到	c=1 d=0.946485 t=59
+de 	的	c=0 d=0.099005 t=59
+de fan ti 	的繁體	c=1 d=0.995012 t=59
+er 	二	c=1 d=1 t=59
+fa 	發	c=1 d=0.995012 t=59
+fan ti 	繁體	c=9 d=8.60739 t=59
+fan ti fan ti 	繁體繁體	c=1 d=0.97531 t=59
+ji de 	記的	c=1 d=0.985112 t=59
+jian ti 	簡體	c=10 d=9.46448 t=59
+jian ti jian ti 	簡體簡體	c=1 d=0.97531 t=59
+ka fei er 	卡非爾	c=0 d=0.0985112 t=59
+li zhi 	李志	c=0 d=0.097531 t=59
+li zhi 	理智	c=0 d=0.0927743 t=59
+li zhi cheng 	李志成	c=3 d=2.91136 t=59
+li zhi cheng 	李志誠	c=4 d=3.67421 t=59
+li zhi cheng 	理智成	c=2 d=1.86946 t=59
+liang de fen ju 	兩地分居	c=0 d=0.0985112 t=59
+ni hao 	你好	c=5 d=4.7293 t=59
+ni hao 	妳好	c=2 d=1.88825 t=59
+ning bo 	寧波	c=1 d=0.985112 t=59
+shi ke 	時刻	c=1 d=0.97531 t=59
+te shi tuan 	特使團	c=1 d=1 t=59
+tu biao 	圖標	c=1 d=0.995012 t=59
+tui song 	推送	c=2 d=1.90268 t=59
+yuan cheng 	遠程	c=2 d=1.90722 t=59
+zheng ju 	證據	c=2 d=1.99501 t=59

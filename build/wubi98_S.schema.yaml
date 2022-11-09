@@ -1,19 +1,32 @@
 __build_info:
   rime_version: 1.7.3
   timestamps:
-    default: 1667868269
-    default.custom: 1667227939
-    key_bindings: 1665557729
+    default: 1667957530
+    default.custom: 1667963494
+    key_bindings: 1667957530
     key_bindings.custom: 0
-    punctuation: 1665557729
+    punctuation: 1667957530
     punctuation.custom: 0
-    symbols: 1667197273
+    symbols: 1667957530
     symbols.custom: 0
-    wubi86.custom: 0
-    wubi86.schema: 1665557729
+    wubi98_S.custom: 1667957396
+    wubi98_S.schema: 1667957396
+ci_reverse_lookup:
+  dictionary: wubi98_S.extended
+  tags:
+    - rvlk2
+  tips: "〔五笔滤镜〕"
 engine:
+  filters:
+    - simplifier
+    - "reverse_lookup_filter@ci_reverse_lookup"
+    - "lua_filter@new_spelling@spelling"
+    - "lua_filter@single_char"
+    - uniquifier
   processors:
     - ascii_composer
+    - "lua_processor@submit_text_processor"
+    - "lua_processor@switch_processor"
     - recognizer
     - key_binder
     - speller
@@ -24,32 +37,80 @@ engine:
   segmentors:
     - ascii_segmentor
     - matcher
+    - "affix_segmentor@mkst"
+    - "affix_segmentor@rvl_zhuyin"
+    - "affix_segmentor@rvlk1"
     - abc_segmentor
     - punct_segmentor
     - fallback_segmentor
   translators:
     - punct_translator
     - reverse_lookup_translator
+    - "table_translator@rvlk1"
     - table_translator
+    - "table_translator@fixed"
+    - "table_translator@mkst"
+    - "table_translator@rvl_zhuyin"
+    - "history_translator@history"
+    - "lua_translator@helper"
+    - "lua_translator@time_date"
+fixed:
+  db_class: tabledb
+  dictionary: wubi98_S.extended
+  disable_user_dict_for_patterns:
+    - "^z.*$"
+  enable_charset_filter: false
+  enable_completion: false
+  enable_encoder: true
+  enable_sentence: false
+  enable_user_dict: true
+  encode_commit_history: false
+  initial_quality: 1000
+  max_phrase_length: 4
+history:
+  initial_quality: 1
+  input: z
+  size: 1
 key_binder:
   bindings:
-    - {accept: ISO_Left_Tab, send: "Shift+Left", when: composing}
-    - {accept: "Shift+Tab", send: "Shift+Left", when: composing}
-    - {accept: Tab, send: "Shift+Right", when: composing}
-    - {accept: minus, send: Page_Up, when: paging}
+    - {accept: minus, send: Page_Up, when: has_menu}
     - {accept: equal, send: Page_Down, when: has_menu}
-    - {accept: bracketleft, send: Page_Up, when: paging}
-    - {accept: bracketright, send: Page_Down, when: has_menu}
-    - {accept: "Control+p", send: Up, when: composing}
-    - {accept: "Control+n", send: Down, when: composing}
-    - {accept: "Control+b", send: Left, when: composing}
-    - {accept: "Control+f", send: Right, when: composing}
-    - {accept: "Control+a", send: Home, when: composing}
-    - {accept: "Control+e", send: End, when: composing}
-    - {accept: "Control+Shift+4", toggle: simplification, when: always}
-  import_preset: default
+    - {accept: semicolon, send: 2, when: has_menu}
+    - {accept: apostrophe, send: 3, when: has_menu}
+    - {accept: space, send: Escape, when: composing}
+    - {accept: space, send: space, when: has_menu}
+    - {accept: Return, send: Escape, when: composing}
+    - {accept: Return, send: Escape, when: has_menu}
+    - {accept: "Control+Shift+4", toggle: zh_trad, when: always}
+    - {accept: "Control+Shift+dollar", toggle: zh_trad, when: always}
+    - {accept: "Control+Shift+F", toggle: zh_trad, when: always}
+    - {accept: "Control+Shift+H", toggle: new_spelling, when: always}
+    - {accept: "Control+Shift+J", toggle: new_hide_pinyin, when: always}
+    - {accept: "Control+Shift+K", toggle: single_char, when: always}
+    - {accept: "Control+Shift+U", toggle: gb2312, when: always}
+    - {accept: "Control+Shift+I", toggle: gb2312, when: always}
+    - {accept: "Control+Shift+O", toggle: gb2312, when: always}
+lua_reverse_db:
+  code: wb_spelling
+  spelling: wb_spelling
 menu:
   page_size: 9
+mkst:
+  db_class: tabledb
+  dictionary: wubi98_S.extended
+  disable_user_dict_for_patterns:
+    - "^z.*$"
+  enable_charset_filter: false
+  enable_completion: false
+  enable_encoder: false
+  enable_sentence: true
+  enable_user_dict: false
+  encode_commit_history: false
+  initial_quality: 10
+  max_phrase_length: 4
+  prefix: "`"
+  tag: mkst
+  tips: "〔精准造词〕"
 punctuator:
   full_shape:
     " ": {commit: "　"}
@@ -70,9 +131,9 @@ punctuator:
     "/": ["／", "÷"]
     ":": {commit: "："}
     ";": {commit: "；"}
-    "<": ["《", "〈", "«", "‹", "⟨"]
+    "<": ["《", "〈", "«", "‹"]
     "=": ["＝", "々", "〃"]
-    ">": ["》", "〉", "»", "›", "⟩"]
+    ">": ["》", "〉", "»", "›"]
     "?": {commit: "？"}
     "@": ["＠", "☯"]
     "[": ["「", "【", "〔", "［", "〚", "〘"]
@@ -103,9 +164,9 @@ punctuator:
     "/": ["、", "､", "/", "／", "÷"]
     ":": {commit: "："}
     ";": {commit: "；"}
-    "<": ["《", "〈", "«", "‹", "⟨", "˂", "˱"]
+    "<": ["《", "〈", "«", "‹", "˂", "˱"]
     "=": ["=", "々", "〃"]
-    ">": ["》", "〉", "»", "›", "⟩", "˃", "˲"]
+    ">": ["》", "〉", "»", "›", "˃", "˲"]
     "?": {commit: "？"}
     "@": ["@", "©", "®", "℗"]
     "[": ["「", "【", "〔", "［", "〚", "〘"]
@@ -183,7 +244,7 @@ punctuator:
     "/av": ["ꜹ", "ꜻ"]
     "/ay": ["ꜽ"]
     "/b": ["ḃ", "ḅ", "ᵇ", "ƀ", "ƃ", "ḇ", "ɓ", "ᵬ", "ᶀ", "ꞗ"]
-    "/bd": ["、", "。", "「", "」", "『", "』", "【", "】", "〈", "〉", "《", "》", "⟨", "⟩", "₋", "⁻", "―", "˗", "ˉ", "＿", "﹍", "﹎", "．", "¡", "‼", "⁉", "¿", "؟", "⁈", "⁇", "､", "｡", "〃", "〄", "々", "〆", "〇", "〒", "〓", "〔", "〕", "〖", "〗", "〘", "〙", "〚", "〛", "〜", "〝", "〞", "〟", "〠", "〰", "〱", "〲", "〳", "〴", "〵", "〶", "〷", "〻", "〼", "〽"]
+    "/bd": ["、", "。", "「", "」", "『", "』", "【", "】", "〈", "〉", "《", "》", "₋", "⁻", "―", "˗", "ˉ", "＿", "﹍", "﹎", "．", "¡", "‼", "⁉", "¿", "؟", "⁈", "⁇", "､", "｡", "〃", "〄", "々", "〆", "〇", "〒", "〓", "〔", "〕", "〖", "〗", "〘", "〙", "〚", "〛", "〜", "〝", "〞", "〟", "〠", "〰", "〱", "〲", "〳", "〴", "〵", "〶", "〷", "〻", "〼", "〽"]
     "/bdz": ["﹅", "﹆", "﹁", "﹂", "﹃", "﹄", "︙", "︱", "︻", "︼", "︗", "︘", "︵", "︶", "︷", "︸", "︹", "︺", "︿", "﹀", "︽", "︾", "︰", "︲", "︳", "︴", "﹉", "﹊", "﹋", "﹌", "﹍", "﹎", "﹏", "﹇", "﹈", "︐", "︑", "︒", "︔", "︕", "︖"]
     "/bg": ["☰", "☱", "☲", "☳", "☴", "☵", "☶", "☷"]
     "/bgm": ["乾", "兌", "離", "震", "巽", "坎", "艮", "坤"]
@@ -192,7 +253,7 @@ punctuator:
     "/c": ["ç", "ć", "č", "ĉ", "ċ", "ᶜ", "ȼ", "ꞓ", "ƈ", "ḉ", "ꞔ", "ɕ", "ᶝ", "ꜿ"]
     "/d": ["ď", "ḋ", "ᵈ", "đ", "ƌ", "ᵭ", "ḑ", "ḓ", "ḏ", "ḍ", "ɖ", "ɗ", "ᶑ", "ᶁ", "ð", "ᶞ", "ꝱ", "ʤ", "ʣ", "ʥ", "ȡ", "ƍ", "ǳ", "ǆ", "ẟ"]
     "/db": ["ȸ"]
-    "/dn": ["❖", "⌘", "⌃", "⌥", "⎇", "⇧", "⇪", "␣", "⇥", "⇤", "↩", "⌅", "⌤", "⌫", "⌦", "⌧", "⎋", "⌨", "◁", "⌀", "⌖", "⌗", "⏏", "↖", "↘", "⇞", "⇟", "⌚", "⏰", "⏱", "⏲", "⏳", "⌛", "⌜", "⌝", "⌞", "⌟", "⍑", "⏩", "⏪", "⏫", "⏬", "⏭", "⏮", "⏯"]
+    "/dn": ["❖", "⌘", "⌃", "⌥", "⎇", "⇧", "⇪", "␣", "⇥", "⇤", "↩", "⌅", "⌤", "⌫", "⌦", "⌧", "⎋", "⌨", "◁", "⌀", "⌖", "⌗", "⏏", "↖", "↘", "⇞", "⇟", "⌚", "⏰", "⏱", "⏲", "⏳", "⌛", "⌜", "⌝⌞⌟", "⍑", "⏩", "⏪", "⏫", "⏬", "⏭", "⏮", "⏯"]
     "/dw": ["Å", "℃", "％", "‰", "‱", "°", "℉", "㏃", "㏆", "㎈", "㏄", "㏅", "㎝", "㎠", "㎤", "㏈", "㎗", "㎙", "㎓", "㎬", "㏉", "㏊", "㏋", "㎐", "㏌", "㎄", "㎅", "㎉", "㎏", "㎑", "㏍", "㎘", "㎞", "㏎", "㎢", "㎦", "㎪", "㏏", "㎸", "㎾", "㏀", "㏐", "㏓", "㎧", "㎨", "㎡", "㎥", "㎃", "㏔", "㎆", "㎎", "㎒", "㏕", "㎖", "㎜", "㎟", "㎣", "㏖", "㎫", "㎳", "㎷", "㎹", "㎽", "㎿", "㏁", "㎁", "㎋", "㎚", "㎱", "㎵", "㎻", "㏘", "㎩", "㎀", "㎊", "㏗", "㏙", "㏚", "㎰", "㎴", "㎺", "㎭", "㎮", "㎯", "㏛", "㏜", "㎔", "㏝", "㎂", "㎌", "㎍", "㎕", "㎛", "㎲", "㎶", "㎼"]
     "/dz": ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"]
     "/e": ["ē", "é", "ě", "è", "ȅ", "ê", "ĕ", "ȇ", "ė", "ë", "ẽ", "ₑ", "ᵉ", "ɇ", "ꬳ", "ẻ", "ȩ", "ę", "ḙ", "ẹ", "ḛ", "ḗ", "ḕ", "ế", "ề", "ễ", "ể", "ḝ", "ệ", "ᶒ", "ꬴ", "ɘ", "ə", "ɚ", "ᶕ", "ɛ", "ᵋ", "ᶓ", "ɜ", "ᵌ", "ᴈ", "ᶟ", "ɝ", "ᶔ", "ɞ", "ʚ", "ǝ", "ₔ", "ᵊ", "ȝ", "ⱸ"]
@@ -207,7 +268,7 @@ punctuator:
     "/fk": ["▀", "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█", "▉", "▊", "▋", "▌", "▍", "▎", "▏", "▐", "░", "▒", "▓", "▔", "▕", "▖", "▗", "▘", "▙", "▚", "▛", "▜", "▝", "▞", "▟"]
     "/fl": ["ﬂ"]
     "/fn": ["ʩ"]
-    "/fs": ["‰", "⅟", "½", "↉", "⅓", "⅔", "¼", "¾", "⅕", "⅖", "⅗", "⅘", "⅙", "⅚", "⅐", "⅛", "⅜", "⅝", "⅞", "⅑", "⅒"]
+    "/fs": ["⅟", "½", "↉", "⅓", "⅔", "¼", "⅕", "⅖", "⅗", "⅘", "⅙", "⅚", "⅐", "⅛", "⅜", "⅝", "⅞", "⅑", "⅒"]
     "/g": ["ḡ", "ǵ", "ǧ", "ĝ", "ğ", "ġ", "ᵍ", "ǥ", "ꞡ", "ģ", "ɠ", "ᵷ", "ᶃ", "ɡ", "ꬶ", "ᶢ", "ɣ", "ˠ", "ɤ", "ᵹ"]
     "/gz": ["甲子", "乙丑", "丙寅", "丁卯", "戊辰", "己巳", "庚午", "辛未", "壬申", "癸酉", "甲戌", "乙亥", "丙子", "丁丑", "戊寅", "己卯", "庚辰", "辛巳", "壬午", "癸未", "甲申", "乙酉", "丙戌", "丁亥", "戊子", "己丑", "庚寅", "辛卯", "壬辰", "癸巳", "甲午", "乙未", "丙申", "丁酉", "戊戌", "己亥", "庚子", "辛丑", "壬寅", "癸卯", "甲辰", "乙巳", "丙午", "丁未", "戊申", "己酉", "庚戌", "辛亥", "壬子", "癸丑", "甲寅", "乙卯", "丙辰", "丁巳", "戊午", "己未", "庚申", "辛酉", "壬戌", "癸亥"]
     "/h": ["ĥ", "ȟ", "ḣ", "ḧ", "ͪ", "ħ", "ɦ", "ʱ", "ꜧ", "ꭜ", "ɧ", "ḩ", "ẖ", "ḫ", "ḥ", "ⱨ", "ꞕ", "ɥ", "ᶣ", "ʮ", "ʯ", "ⱶ"]
@@ -284,7 +345,7 @@ punctuator:
     "/sd": ["ˉ", "ˊ", "ˇ", "ˋ", "ˆ", "˙", "˜", "˥", "˦", "˧", "˨", "˩", "꜀", "꜁", "꜂", "꜃", "꜄", "꜅", "꜆", "꜇", "〪", "〫", "〬", "〭"]
     "/seg": ["白羊宮", "金牛宮", "雙子宮", "巨蟹宮", "獅子宮", "室女宮", "天秤宮", "天蠍宮", "人馬宮", "摩羯宮", "寶瓶宮", "雙魚宮"]
     "/sj": ["㍘", "㍙", "㍚", "㍛", "㍜", "㍝", "㍞", "㍟", "㍠", "㍡", "㍢", "㍣", "㍤", "㍥", "㍦", "㍧", "㍨", "㍩", "㍪", "㍫", "㍬", "㍭", "㍮", "㍯", "㍰"]
-    "/sx": ["±", "÷", "×", "∈", "∏", "∑", "－", "＋", "＜", "≮", "＝", "≠", "＞", "≯", "∕", "√", "∝", "∞", "⟨", "⟩", "∟", "∠", "∥", "∧", "∨", "∩", "∪", "∫", "∮", "∴", "∵", "∷", "∽", "≈", "≌", "≒", "≡", "≤", "≥", "≦", "≧", "⊕", "⊙", "⊥", "⊿", "㏑", "㏒"]
+    "/sx": ["±", "÷", "×", "∈", "∏", "∑", "－", "＋", "＜", "≮", "＝", "≠", "＞", "≯", "∕", "√", "∝", "∞", "∟", "∠", "∥", "∧", "∨", "∩", "∪", "∫", "∮", "∴", "∵", "∷", "∽", "≈", "≌", "≒", "≡", "≤", "≥", "≦", "≧", "⊕", "⊙", "⊥", "⊿", "㏑", "㏒"]
     "/sz": ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"]
     "/szd": ["⒈", "⒉", "⒊", "⒋", "⒌", "⒍", "⒎", "⒏", "⒐", "⒑", "⒒", "⒓", "⒔", "⒕", "⒖", "⒗", "⒘", "⒙", "⒚", "⒛"]
     "/szh": ["⑴", "⑵", "⑶", "⑷", "⑸", "⑹", "⑺", "⑻", "⑼", "⑽", "⑾", "⑿", "⒀", "⒁", "⒂", "⒃", "⒄", "⒅", "⒆", "⒇"]
@@ -294,7 +355,7 @@ punctuator:
     "/tc": ["ʨ"]
     "/tg": ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"]
     "/th": ["ᵺ"]
-    "/tq": ["☀", "☁", "⛅", "⛈", "⛆", "☂", "☔", "☃", "⛄"]
+    "/tq": ["☀", "☁", "⛅", "⛈", "⛆", "☂", "☔", "☃", "⛄", "⛇"]
     "/ts": ["ʦ", "ʧ"]
     "/tt": ["☄", "☼", "☽", "☾", "☿", "♀", "♁", "♂", "♃", "♄", "♅", "♆", "♇"]
     "/txj": ["⚊", "⚋", "⚌", "⚍", "⚎", "⚏", "𝌀", "𝌁", "𝌂", "𝌃", "𝌄", "𝌅", "𝌆", "𝌇", "𝌈", "𝌉", "𝌊", "𝌋", "𝌌", "𝌍", "𝌎", "𝌏", "𝌐", "𝌑", "𝌒", "𝌓", "𝌔", "𝌕", "𝌖", "𝌗", "𝌘", "𝌙", "𝌚", "𝌛", "𝌜", "𝌝", "𝌞", "𝌟", "𝌠", "𝌡", "𝌢", "𝌣", "𝌤", "𝌥", "𝌦", "𝌧", "𝌨", "𝌩", "𝌪", "𝌫", "𝌬", "𝌭", "𝌮", "𝌯", "𝌰", "𝌱", "𝌲", "𝌳", "𝌴", "𝌵", "𝌶", "𝌷", "𝌸", "𝌹", "𝌺", "𝌻", "𝌼", "𝌽", "𝌾", "𝌿", "𝍀", "𝍁", "𝍂", "𝍃", "𝍄", "𝍅", "𝍆", "𝍇", "𝍈", "𝍉", "𝍊", "𝍋", "𝍌", "𝍍", "𝍎", "𝍏", "𝍐", "𝍑", "𝍒", "𝍓", "𝍔", "𝍕", "𝍖"]
@@ -325,50 +386,136 @@ recognizer:
   import_preset: default
   patterns:
     email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"
+    helper: "^help$"
+    mkst: "^[a-y]*`[a-y`]*$"
     punct: "^/([0-9]0?|[A-Za-z]+)$"
-    reverse_lookup: "^z[a-z]*'?$"
+    rvlk1: "^z[a-z]*$"
+    rvlk2: "^z[a-z]*$"
     uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"
     url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"
+    zhuyin: "~[a-y]*?$"
 reverse_lookup:
-  dictionary: pinyin_simp
+  db_class: tabledb
+  dictionary: py
+  disable_user_dict_for_patterns:
+    - "^z.*$"
+  enable_charset_filter: false
+  enable_completion: false
+  enable_encoder: false
+  enable_sentence: false
+  enable_user_dict: false
+  encode_commit_history: false
+  initial_quality: 100000
+  max_phrase_length: 4
+  preedit_format:
+    - "xform/([nl])v/$1ü/"
+    - "xform/([nl])ue/$1üe/"
+    - "xform/([jqxy])v/$1u/"
+  tag: rvlk2
+  tips: "〔拼音反查〕"
+rvl_zhuyin:
+  db_class: tabledb
+  dictionary: wubi98_S.extended
+  disable_user_dict_for_patterns:
+    - "^z.*$"
+  enable_charset_filter: false
+  enable_completion: false
+  enable_encoder: false
+  enable_sentence: true
+  enable_user_dict: false
+  encode_commit_history: false
+  initial_quality: 10
+  max_phrase_length: 4
+  prefix: "~"
+  tag: zhuyin
+  tips: "〔以形查音〕"
+rvlk1:
+  db_class: tabledb
+  dictionary: py
+  disable_user_dict_for_patterns:
+    - "^z.*$"
+  enable_charset_filter: false
+  enable_completion: false
+  enable_encoder: false
+  enable_sentence: false
+  enable_user_dict: false
+  encode_commit_history: false
+  extra_tags:
+    - rvlk2
+  initial_quality: 100000
+  max_phrase_length: 4
   preedit_format:
     - "xform/([nl])v/$1ü/"
     - "xform/([nl])ue/$1üe/"
     - "xform/([jqxy])v/$1u/"
   prefix: z
-  suffix: "'"
-  tips: "〔拼音〕"
+  tag: rvlk1
+  tips: "〔拼音反查〕"
 schema:
   author:
-    - "發明人 王永民先生"
+    - "發明人 王永民"
   dependencies:
-    - pinyin_simp
+    - py
   description: |
-    五筆字型86版
-    碼表源自 ibus-table
+    五笔98版
+    碼表源自 yanhuacuo
     敲 z 鍵進入拼音反查
     
-  name: "五笔86"
-  schema_id: wubi86
-  version: 0.21
+  name: "词优"
+  schema_id: wubi98_S
+  version: 6.0
+simplifier:
+  opencc_config: s2t.json
+  option_name: zh_trad
 speller:
-  delimiter: " ;'"
+  auto_clear: max_length
+  auto_select: true
+  delimiter: "`"
+  max_code_length: 4
+style:
+  candidate_list_layout: stacked
+  comment_font_face: "98WB-0"
+  comment_font_point: 16
+  "font_face:": "98WB-0"
+  font_point: 18
+  fullscreen: false
+  horizontal: false
+  inline_preedit: false
+  preedit_type: composition
+  text_orientation: horizontal
 switches:
   - name: ascii_mode
     reset: 0
-    states: ["中文", "西文"]
-  - name: full_shape
-    states: ["半角", "全角"]
-  - name: extended_charset
-    states: ["常用", "增廣"]
+  - name: zh_trad
+    reset: 0
+    states: ["简", "繁"]
+  - name: new_spelling
+    reset: 1
+    states: ["隐", "显"]
+  - name: rvl_zhuyin
+    reset: 1
+  - name: new_hide_pinyin
+    reset: 1
+    states: ["音", "哑"]
+  - name: single_char
+    reset: 0
+    states: ["词", "单"]
   - name: ascii_punct
+    reset: 0
     states: ["。，", "．，"]
+  - name: full_shape
+    reset: 0
+    states: ["半", "全"]
 translator:
-  dictionary: wubi86
+  db_class: tabledb
+  dictionary: wubi98_S.extended
   disable_user_dict_for_patterns:
     - "^z.*$"
-  enable_charset_filter: true
-  enable_encoder: true
-  enable_sentence: true
-  encode_commit_history: true
+  enable_charset_filter: false
+  enable_completion: false
+  enable_encoder: false
+  enable_sentence: false
+  enable_user_dict: false
+  encode_commit_history: false
+  initial_quality: 100000
   max_phrase_length: 4

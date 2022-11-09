@@ -1,0 +1,7 @@
+# Rime user dictionary
+#@/db_name	py
+#@/db_type	userdb
+#@/rime_version	1.7.3
+#@/tick	1
+#@/user_id	zcheng
+ni hao 	你好	c=1 d=1 t=1

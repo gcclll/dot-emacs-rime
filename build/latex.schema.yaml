@@ -1,8 +1,8 @@
 __build_info:
   rime_version: 1.7.3
   timestamps:
-    default: 1667830896
-    default.custom: 1667831796
+    default: 1667868269
+    default.custom: 1667227939
     key_bindings: 1665557729
     key_bindings.custom: 0
     latex.custom: 0
@@ -21,7 +21,7 @@ engine:
   translators:
     - table_translator
 menu:
-  page_size: 5
+  page_size: 9
 schema:
   author:
     - "slbtty <shenlebantongying@gmail.com>"

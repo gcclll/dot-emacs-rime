@@ -1,6 +1,7 @@
 __build_info:
   rime_version: 1.7.3
   timestamps:
+<<<<<<< HEAD
     default: 1669124663
     default.custom: 1669124663
     key_bindings: 1669124663
@@ -11,6 +12,18 @@ __build_info:
     symbols.custom: 0
     wubi86.custom: 0
     wubi86.schema: 1669124663
+=======
+    default: 1667957530
+    default.custom: 1667984120
+    key_bindings: 1667957530
+    key_bindings.custom: 0
+    punctuation: 1667957530
+    punctuation.custom: 0
+    symbols: 1667981679
+    symbols.custom: 0
+    wubi86.custom: 0
+    wubi86.schema: 1667981966
+>>>>>>> aad81bb (2022-11-25 08:44:58)
 engine:
   processors:
     - ascii_composer

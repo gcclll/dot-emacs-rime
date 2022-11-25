@@ -1,9 +1,15 @@
 __build_info:
   rime_version: 1.7.3
   timestamps:
+<<<<<<< HEAD
     default: 1669124663
     default.custom: 1669124663
     key_bindings: 1669124663
+=======
+    default: 1667957530
+    default.custom: 1667984120
+    key_bindings: 1667957530
+>>>>>>> aad81bb (2022-11-25 08:44:58)
     key_bindings.custom: 0
     punctuation: 1669124663
     punctuation.custom: 0

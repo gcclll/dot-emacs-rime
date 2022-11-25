@@ -1,9 +1,5 @@
 var:
-<<<<<<< HEAD
-  last_build_time: 1669291960
-=======
   last_build_time: 1669010950
->>>>>>> aad81bb (2022-11-25 08:44:58)
   option:
     full_shape: false
     simplification: true
